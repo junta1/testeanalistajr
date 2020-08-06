@@ -13,6 +13,8 @@ services:
       volumes:
         - ./docker/mysql/my.cnf:/etc/mysql/conf.d/custom.cnf
         - ./docker/mysql/data:/var/lib/mysql
+      ports:
+        - "7880:3306"
 
     redis:
       image: redis:alpine
