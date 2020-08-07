@@ -3,12 +3,16 @@ declare(strict_types=1);
 
 namespace CustomerManagement\Repositories;
 
+use CustomerManagement\Models\AddressModel;
 use CustomerManagement\Models\ClientModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class ClientRepository
 {
     protected $client;
+
+    protected $address;
 
     protected $fields = [
         'clie_company_name',
@@ -21,12 +25,24 @@ class ClientRepository
         'deleted_by',
     ];
 
-    public function __construct(ClientModel $clientModel)
+    protected $fieldsAddress = [
+        'addr_zipcode',
+        'addr_public_place',
+        'addr_neighbordhood',
+        'addr_complement',
+        'addr_number',
+        'addr_city',
+        'addr_state',
+        'addr_main'
+    ];
+
+    public function __construct(ClientModel $clientModel, AddressModel $addressModel)
     {
         $this->client = $clientModel;
+        $this->address = $addressModel;
     }
 
-    public function save(array $input)
+    public function save(array $input): Model
     {
         return DB::transaction(function () use ($input) {
 
@@ -36,6 +52,25 @@ class ClientRepository
                 }
             }
             $this->client->save();
+
+            if (isset($input['address'])) {
+
+                foreach ($input['address'] as $addressOnly) {
+
+                    foreach ($this->fieldsAddress as $fieldAddress){
+
+                        if (isset($addressOnly[$fieldAddress])){
+
+                            $this->address->{$fieldAddress} = $addressOnly[$fieldAddress];
+                        }
+
+                    }
+
+                    $this->address->save();
+
+//                    $this->address->client()->attach($this->client->clie_id);
+                }
+            }
 
             return $this->client;
         });
