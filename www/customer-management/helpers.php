@@ -55,6 +55,3 @@ if (!function_exists('emailValidation')) {
         }
     }
 }
-
-
-

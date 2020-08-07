@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace CustomerManagement\Service;
 
 use CustomerManagement\Repositories\ClientRepository;
-use Illuminate\Support\Facades\Auth;
 
 class ClientService
 {
@@ -15,6 +14,24 @@ class ClientService
         $this->client = $clientRepository;
     }
 
+    public function all(array $input = null): array
+    {
+        $datas = $this->client->getWhere($input);
+
+        foreach ($datas as $data) {
+            $outputCustom[] = $this->outputCustom($data);
+        }
+
+        return $outputCustom;
+    }
+
+    public function find(int $id): array
+    {
+        $data = $this->client->find($id);
+
+        return $this->outputCustom($data);
+    }
+
     public function save(array $input): array
     {
         $dataCustom = $this->inputCustom($input);
@@ -22,6 +39,12 @@ class ClientService
         $data = $this->client->save($dataCustom);
 
         return $this->outputCustom($data);
+    }
+
+    public function delete($id): bool
+    {
+        $user = 1;
+        return $this->client->delete($id, $user);
     }
 
     protected function inputCustom($input): array
