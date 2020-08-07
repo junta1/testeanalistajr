@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class AddressModel extends Model
 {
-    protected $primaryKey = 'addr_id';
-
     protected $table = 'address';
+
+    protected $primaryKey = 'addr_id';
 
     public $timestamps;
 
