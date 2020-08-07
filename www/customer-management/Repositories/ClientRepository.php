@@ -63,15 +63,13 @@ class ClientRepository
 
                             $this->address->{$fieldAddress} = $addressOnly[$fieldAddress];
                         }
-
                     }
 
                     $this->address->save();
 
-//                    $this->address->client()->attach($this->client->clie_id);
+                    $this->client->address()->attach($this->address->addr_id);
                 }
             }
-
             return $this->client;
         });
     }

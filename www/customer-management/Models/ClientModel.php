@@ -26,6 +26,6 @@ class ClientModel extends Model
 
     public function address()
     {
-        $this->belongsToMany(AddressModel::class);
+        return $this->belongsToMany(AddressModel::class, 'client_address', 'cod_client', 'cod_address');
     }
 }

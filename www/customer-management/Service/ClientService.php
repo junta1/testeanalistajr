@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace CustomerManagement\Service;
 
 use CustomerManagement\Repositories\ClientRepository;
+use Illuminate\Support\Facades\Auth;
 
 class ClientService
 {
