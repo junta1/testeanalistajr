@@ -23,4 +23,9 @@ class ClientModel extends Model
     ];
 
     use SoftDeletes;
+
+    public function address()
+    {
+        $this->belongsToMany(AddressModel::class);
+    }
 }
