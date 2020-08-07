@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace CustomerManagement\Repositories;
 
 use CustomerManagement\Models\ClientModel;
+use Illuminate\Support\Facades\DB;
 
 class ClientRepository
 {
@@ -18,9 +19,6 @@ class ClientRepository
         'created_by',
         'updated_by',
         'deleted_by',
-        'created_at',
-        'updated_at',
-        'deleted_at'
     ];
 
     public function __construct(ClientModel $clientModel)
@@ -30,14 +28,16 @@ class ClientRepository
 
     public function save(array $input)
     {
-        foreach ($this->fields as $field) {
-            if (isset($input[$field])) {
-                $this->client->{$field};
+        return DB::transaction(function () use ($input) {
+
+            foreach ($this->fields as $field) {
+                if (isset($input[$field])) {
+                    $this->client->{$field} = $input[$field];
+                }
             }
-        }
+            $this->client->save();
 
-        $this->client->save();
-
-        return $this->client;
+            return $this->client;
+        });
     }
 }

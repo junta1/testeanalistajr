@@ -50,8 +50,8 @@ class ClientServiceTest extends TestCase
             'telephone' => '21213',
             'responsibleName' => 'Rafael Mattos',
             'email' => 'rafael_xuvisco@yahoo.com.br',
-            'criadoEm' => '2020-09-02',
-            'criadoPor' => 1,
+            'createdAt' => '2020-09-02',
+            'createdBy' => 1,
         ];
         $outputCustom = [
             'idClient' => 1,
@@ -60,8 +60,8 @@ class ClientServiceTest extends TestCase
             'telephone' => '21213',
             'responsibleName' => 'Rafael Mattos',
             'email' => 'rafael_xuvisco@yahoo.com.br',
-            'criadoPor' => 1,
-            'criadoEm' => '2020-09-02'
+            'createdAt' => 1,
+            'createdBy' => '2020/09/02'
         ];
 
         $this->clientRepository

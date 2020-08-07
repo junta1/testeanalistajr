@@ -22,7 +22,5 @@ class ClientModel extends Model
         'deleted_by'
     ];
 
-    public $timestamps;
-
     use SoftDeletes;
 }

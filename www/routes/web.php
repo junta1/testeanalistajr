@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('client', '\CustomerManagement\Http\Controllers\ClientController@store');
+
+//Route::resource('client', '\CustomerManagement\Http\Controllers\ClientController');

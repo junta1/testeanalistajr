@@ -27,11 +27,10 @@ class ClientService
     {
         return [
             'clie_company_name' => $input['companyName'],
-            'clie_cnpj' => $input['cnpj'],
-            'clie_telephone' => $input['telephone'],
+            'clie_cnpj' => onlyNumber($input['cnpj']),
+            'clie_telephone' => onlyNumber($input['telephone']),
             'clie_responsible_name' => $input['responsibleName'],
             'clie_email' => $input['email'],
-            'created_at' => $input['criadoEm'],
             'created_by' => 1
         ];
     }
@@ -41,12 +40,12 @@ class ClientService
         return [
             'idClient' => $output['clie_id'],
             'companyName' => $output['clie_company_name'],
-            'cnpj' => $output['clie_cnpj'],
-            'telephone' => $output['clie_telephone'],
+            'cnpj' => mask($output['clie_cnpj'], '##.###.###/####-##'),
+            'telephone' => mask($output['clie_telephone'], '(###)####-#####'),
             'responsibleName' => $output['clie_responsible_name'],
             'email' => $output['clie_email'],
-            'criadoEm' => $output['created_at'],
-            'criadoPor' => $output['created_by']
+            'createdAt' => dateObjectUsToBr($output['created_at']),
+            'createdBy' => $output['created_by']
         ];
     }
 }
