@@ -14,7 +14,7 @@ class ClientService
         $this->client = $clientRepository;
     }
 
-    public function save(array $input)
+    public function save(array $input): array
     {
         $dataCustom = $this->inputCustom($input);
 
@@ -23,9 +23,9 @@ class ClientService
         return $this->outputCustom($data);
     }
 
-    protected function inputCustom($input)
+    protected function inputCustom($input): array
     {
-        return [
+        $data = [
             'clie_company_name' => $input['companyName'],
             'clie_cnpj' => onlyNumber($input['cnpj']),
             'clie_telephone' => onlyNumber($input['telephone']),
@@ -33,9 +33,28 @@ class ClientService
             'clie_email' => emailValidation($input['email']),
             'created_by' => 1
         ];
+
+        if (isset($input['address'])) {
+
+            foreach ($input['address'] as $address) {
+
+                $data['address'][] = [
+                    'addr_zipcode' => $address['zipcode'],
+                    'addr_public_place' => $address['publicPlace'],
+                    'addr_neighbordhood' => $address['neighbordhood'],
+                    'addr_complement' => $address['complement'],
+                    'addr_number' => $address['number'],
+                    'addr_city' => $address['city'],
+                    'addr_state' => $address['state'],
+                    'addr_main' => false,
+                ];
+            }
+        }
+
+        return $data;
     }
 
-    protected function outputCustom($output)
+    protected function outputCustom($output): array
     {
         return [
             'idClient' => $output['clie_id'],

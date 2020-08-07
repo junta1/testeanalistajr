@@ -22,6 +22,7 @@ class CreateAddress extends Migration
             $table->string('addr_number');
             $table->string('addr_city');
             $table->string('addr_state');
+            $table->boolean('addr_main');
         });
     }
 
