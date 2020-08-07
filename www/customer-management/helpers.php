@@ -44,5 +44,17 @@ if (!function_exists('onlyNumber')) {
     }
 }
 
+if (!function_exists('emailValidation')) {
+
+    function emailValidation($email)
+    {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $email;
+        }else{
+            throw new Exception("Email address '$email' is considered invalid.");
+        }
+    }
+}
+
 
 

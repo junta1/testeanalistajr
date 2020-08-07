@@ -30,7 +30,7 @@ class ClientService
             'clie_cnpj' => onlyNumber($input['cnpj']),
             'clie_telephone' => onlyNumber($input['telephone']),
             'clie_responsible_name' => $input['responsibleName'],
-            'clie_email' => $input['email'],
+            'clie_email' => emailValidation($input['email']),
             'created_by' => 1
         ];
     }

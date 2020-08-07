@@ -48,6 +48,11 @@ class ClientValidation extends FormRequest
 
             'telephone.min' => 'A Telephone min 12 characteres required.',
             'telephone.max' => 'A Telephone max 15 characteres required.',
+
+            'companyName.max' => 'A Company Name max 255 characteres required.',
+            'cnpj.max' => 'A CNPJ max 255 characteres required.',
+            'responsibleName.max' => 'A Responsible Name max 255 characteres required.',
+            'email.max' => 'A E-mail max 255 characteres required.',
         ];
     }
 }
