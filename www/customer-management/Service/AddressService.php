@@ -16,9 +16,38 @@ class AddressService
 
     public function all(int $idClient)
     {
-        $data = $this->address->all($idClient);
+        $datas = $this->address->all($idClient);
 
-        return $data;
+        foreach ($datas as $data) {
+            $outputCustom = $this->outputCustom($data);
+        }
+
+        return $outputCustom;
+    }
+
+    public function find(int $id): array
+    {
+        $data = $this->address->find($id);
+
+        return $this->outputCustom($data);
+    }
+
+    public function save(array $input, int $idClient): array
+    {
+        $data = $this->inputCustom($input);
+
+        $dataCustom = $this->address->save($data, $idClient);
+
+        return $this->outputCustom($dataCustom);
+    }
+
+    public function update(array $input, int $id):array
+    {
+        $data = $this->inputCustom($input);
+
+        $dataCustom = $this->address->update($data, $id);
+
+        return $this->outputCustom($dataCustom);
     }
 
     public function delete(int $id, int $idClient)
