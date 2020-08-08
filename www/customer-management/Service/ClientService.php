@@ -9,9 +9,12 @@ class ClientService
 {
     protected $client;
 
-    public function __construct(ClientRepository $clientRepository)
+    protected $viaCep;
+
+    public function __construct(ClientRepository $clientRepository, ViaCepApiService $viaCepApiService)
     {
         $this->client = $clientRepository;
+        $this->viaCep = $viaCepApiService;
     }
 
     public function all(array $input = null): array
@@ -71,6 +74,10 @@ class ClientService
         if (isset($input['address'])) {
 
             foreach ($input['address'] as $address) {
+
+                $viaCep = $this->viaCep->viaCep($address['zipcode']);
+
+                $viaCepArray = json_decode(trim($viaCep), TRUE);
 
                 $data['address'][] = [
                     'addr_zipcode' => $address['zipcode'],
