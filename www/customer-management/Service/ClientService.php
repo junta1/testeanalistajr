@@ -14,13 +14,48 @@ class ClientService
         $this->client = $clientRepository;
     }
 
+    public function all(array $input = null): array
+    {
+        $datas = $this->client->getWhere($input);
+
+        foreach ($datas as $data) {
+            $outputCustom[] = $this->outputCustom($data);
+        }
+
+        return $outputCustom;
+    }
+
+    public function find(int $id): array
+    {
+        $data = $this->client->find($id);
+
+        return $this->outputCustom($data);
+    }
+
     public function save(array $input): array
     {
         $dataCustom = $this->inputCustom($input);
+        $dataCustom['created_by'] = 1;
 
         $data = $this->client->save($dataCustom);
 
         return $this->outputCustom($data);
+    }
+
+    public function update(array $input, int $id): array
+    {
+        $dataCustom = $this->inputCustom($input);
+        $dataCustom['updated_by'] = 1;
+
+        $data = $this->client->update($dataCustom, $id);
+
+        return $this->outputCustom($data);
+    }
+
+    public function delete($id): bool
+    {
+        $user = 1;
+        return $this->client->delete($id, $user);
     }
 
     protected function inputCustom($input): array
@@ -31,7 +66,6 @@ class ClientService
             'clie_telephone' => onlyNumber($input['telephone']),
             'clie_responsible_name' => $input['responsibleName'],
             'clie_email' => emailValidation($input['email']),
-            'created_by' => 1
         ];
 
         if (isset($input['address'])) {
