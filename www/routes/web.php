@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('clients/{data?}','\CustomerManagement\Http\Controllers\ClientController@index');
 Route::get('client/{id}','\CustomerManagement\Http\Controllers\ClientController@show');
 Route::post('client', '\CustomerManagement\Http\Controllers\ClientController@store');
+Route::put('client/{id}', '\CustomerManagement\Http\Controllers\ClientController@store');

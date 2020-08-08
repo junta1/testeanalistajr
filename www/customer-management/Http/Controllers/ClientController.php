@@ -59,4 +59,32 @@ class ClientController extends Controller
             return response()->json($e->getMessage(), 400);
         }
     }
+
+    public function update(ClientValidation $request, int $id)
+    {
+        try {
+            $input = $request->all();
+
+            $data = $this->client->update($input, $id);
+
+            return response()->json($data, 200);
+
+        } catch (\Exception $e) {
+
+            return response()->json($e->getMessage(), 400);
+        }
+    }
+
+    public function destroy(int $id)
+    {
+        try {
+            $data = $this->client->delete($id);
+
+            return response()->json($data, 200);
+
+        } catch (\Exception $e) {
+
+            return response()->json($e->getMessage(), 400);
+        }
+    }
 }

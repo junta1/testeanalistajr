@@ -90,36 +90,16 @@ class ClientRepository
 
     public function update(array $input, $id): Model
     {
-        return DB::transaction(function () use ($input, $id) {
+        $this->client = $this->find($id);
 
-            $this->client = $this->find($id);
-
-            foreach ($this->fields as $field) {
-                if (isset($input[$field])) {
-                    $this->client->{$field} = $input[$field];
-                }
+        foreach ($this->fields as $field) {
+            if (isset($input[$field])) {
+                $this->client->{$field} = $input[$field];
             }
-            $this->client->save();
+        }
+        $this->client->save();
 
-            if (isset($input['address'])) {
-
-                foreach ($input['address'] as $addressOnly) {
-
-                    foreach ($this->fieldsAddress as $fieldAddress) {
-
-                        if (isset($addressOnly[$fieldAddress])) {
-
-                            $this->address->{$fieldAddress} = $addressOnly[$fieldAddress];
-                        }
-                    }
-
-                    $this->address->save();
-
-                    $this->client->address()->attach($this->address->addr_id);
-                }
-            }
-            return $this->client;
-        });
+        return $this->client;
     }
 
     public function delete(int $id, int $user): bool
