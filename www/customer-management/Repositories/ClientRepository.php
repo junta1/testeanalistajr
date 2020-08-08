@@ -88,7 +88,7 @@ class ClientRepository
         });
     }
 
-    public function update(array $input, $id): Model
+    public function update(array $input, int $id): Model
     {
         $this->client = $this->find($id);
 

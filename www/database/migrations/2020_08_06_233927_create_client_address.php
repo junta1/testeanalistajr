@@ -18,7 +18,7 @@ class CreateClientAddress extends Migration
             $table->unsignedBigInteger('cod_address');
 
             $table->foreign('cod_client')->references('clie_id')->on('client');
-            $table->foreign('cod_address')->references('addr_id')->on('address');
+            $table->foreign('cod_address')->references('addr_id')->on('address')->onDelete('cascade');
         });
     }
 

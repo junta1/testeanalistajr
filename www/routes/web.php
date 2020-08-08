@@ -24,3 +24,7 @@ Route::get('client/{id}','\CustomerManagement\Http\Controllers\ClientController@
 Route::post('client', '\CustomerManagement\Http\Controllers\ClientController@store');
 Route::put('client/{id}', '\CustomerManagement\Http\Controllers\ClientController@update');
 Route::delete('client/{id}', '\CustomerManagement\Http\Controllers\ClientController@destroy');
+
+Route::get('address/{idClient}','\CustomerManagement\Http\Controllers\AddressController@index');
+Route::delete('address/{id}/{idClient}','\CustomerManagement\Http\Controllers\AddressController@destroy');
+
