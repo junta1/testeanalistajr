@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace CustomerManagement\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use CustomerManagement\Service\AddressService;
 use CustomerManagement\Service\ClientService;
 use CustomerManagement\Validation\ClientValidation;
 use Illuminate\Http\Request;
@@ -13,11 +14,15 @@ class ClientController extends Controller
 {
     protected $client;
 
-    public function __construct(ClientService $clientService)
+    protected $address;
+
+    public function __construct(ClientService $clientService, AddressService $addressService)
     {
         $this->client = $clientService;
 
-//        $this->middleware('auth');
+        $this->address = $addressService;
+
+        $this->middleware('auth');
     }
 
     public function index(Request $request)
@@ -33,15 +38,19 @@ class ClientController extends Controller
 
     public function show(int $id)
     {
-        try {
-            $data = $this->client->find($id);
+        $client = $this->client->find($id);
 
-            return response()->json($data, 200);
+        $addresses = $this->address->all($client['idClient']);
 
-        } catch (\Exception $e) {
+        return view('client.show', compact([
+            'client',
+            'addresses'
+        ]));
+    }
 
-            return response()->json($e->getMessage(), 400);
-        }
+    public function create()
+    {
+        return view('client.create');
     }
 
     public function store(ClientValidation $request)
@@ -49,9 +58,9 @@ class ClientController extends Controller
         try {
             $input = $request->all();
 
-            $data = $this->client->save($input);
+            $this->client->save($input);
 
-            return response()->json($data, 200);
+            return redirect()->route('clients.index');
 
         } catch (\Exception $e) {
 
@@ -68,19 +77,25 @@ class ClientController extends Controller
 
     public function update(ClientValidation $request, int $id)
     {
-        $input = $request->all();
+        try {
+            $input = $request->all();
 
-        $this->client->update($input, $id);
+            $this->client->update($input, $id);
 
-        return redirect()->route('clients.index');
+            return redirect()->route('clients.index');
+
+        } catch (\Exception $e) {
+
+            return response()->json($e->getMessage(), 400);
+        }
     }
 
     public function destroy(int $id)
     {
         try {
-            $data = $this->client->delete($id);
+            $this->client->delete($id);
 
-            return response()->json($data, 200);
+            return redirect()->route('clients.index');
 
         } catch (\Exception $e) {
 
