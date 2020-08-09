@@ -18,6 +18,7 @@ class AddressService
     {
         $datas = $this->address->all($idClient);
 
+        $outputCustom = [];
         foreach ($datas as $data) {
             $outputCustom[] = $this->outputCustom($data);
         }

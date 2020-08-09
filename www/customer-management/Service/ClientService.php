@@ -9,18 +9,16 @@ class ClientService
 {
     protected $client;
 
-    protected $viaCep;
-
-    public function __construct(ClientRepository $clientRepository, ViaCepApiService $viaCepApiService)
+    public function __construct(ClientRepository $clientRepository)
     {
         $this->client = $clientRepository;
-        $this->viaCep = $viaCepApiService;
     }
 
     public function all(array $input = null): array
     {
         $datas = $this->client->getWhere($input);
 
+        $outputCustom = [];
         foreach ($datas as $data) {
             $outputCustom[] = $this->outputCustom($data);
         }
@@ -74,10 +72,6 @@ class ClientService
         if (isset($input['address'])) {
 
             foreach ($input['address'] as $address) {
-
-                $viaCep = $this->viaCep->viaCep($address['zipcode']);
-
-                $viaCepArray = json_decode(trim($viaCep), TRUE);
 
                 $data['address'][] = [
                     'addr_zipcode' => $address['zipcode'],
