@@ -31,9 +31,13 @@ class ClientController extends Controller
 
         $clients = $this->client->all($input);
 
-//        $dataTable = DataTables::of($data)->make(true);
+//        $dataTable = DataTables::of($clients)->make(true);
+        $dataTable = json_encode($clients);
 
-        return view('home', compact('clients'));
+        return view('home', compact([
+            'clients',
+            'dataTable',
+        ]));
     }
 
     public function show(int $id)

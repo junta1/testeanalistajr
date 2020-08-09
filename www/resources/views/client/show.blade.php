@@ -53,7 +53,9 @@
                                     </tbody>
                                 </table>
 
-                                <div class="card-footer" align="center">Endereço do cliente</div>
+                                <div class="card-footer" align="center">Endereço do cliente </div>
+                                <a href="{{ url('address/create/'. $client['idClient']) }}"
+                                   class="btn btn-xs btn-success pull-right">Adicionar novo Cliente</a>
 
                                 <table class="table">
                                     <thead>

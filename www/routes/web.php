@@ -29,9 +29,11 @@ Route::get('client/edit/{id}', '\CustomerManagement\Http\Controllers\ClientContr
 //Route::get('client/create', '\CustomerManagement\Http\Controllers\ClientController@create')->name('client.create');
 
 
+Route::resource('address', '\CustomerManagement\Http\Controllers\AddressController');
 Route::get('adresses/{idClient}','\CustomerManagement\Http\Controllers\AddressController@index');
-Route::get('address/{id}','\CustomerManagement\Http\Controllers\AddressController@show');
-Route::post('address/{idClient}','\CustomerManagement\Http\Controllers\AddressController@store');
-Route::put('address/{id}','\CustomerManagement\Http\Controllers\AddressController@update');
-Route::delete('address/{id}/{idClient}','\CustomerManagement\Http\Controllers\AddressController@destroy');
+Route::get('address/create/{idClient}','\CustomerManagement\Http\Controllers\AddressController@create');
+Route::post('address/client/{idClient}','\CustomerManagement\Http\Controllers\AddressController@store')->name('address.client');
+//Route::get('address/{id}','\CustomerManagement\Http\Controllers\AddressController@show');
+//Route::put('address/{id}','\CustomerManagement\Http\Controllers\AddressController@update');
+//Route::delete('address/{id}/{idClient}','\CustomerManagement\Http\Controllers\AddressController@destroy');
 

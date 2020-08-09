@@ -4,15 +4,20 @@ namespace CustomerManagement\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use CustomerManagement\Service\AddressService;
+use CustomerManagement\Service\ClientService;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
     protected $address;
 
-    public function __construct(AddressService $addressService)
+    protected $client;
+
+    public function __construct(AddressService $addressService, ClientService $clientService)
     {
         $this->address = $addressService;
+
+        $this->client = $clientService;
     }
 
     public function index(int $idClient)
@@ -41,14 +46,21 @@ class AddressController extends Controller
         }
     }
 
+    public function create($idClient)
+    {
+        $client = $this->client->find($idClient);
+
+        return view('address.create', compact('client'));
+    }
+
     public function store(Request $request, int $idClient)
     {
         try {
             $input = $request->all();
 
-            $data = $this->address->save($input, $idClient);
+            $this->address->save($input, $idClient);
 
-            return response()->json($data, 200);
+            return redirect()->route('clients.index');
 
         } catch (\Exception $e) {
 
