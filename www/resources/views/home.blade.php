@@ -6,6 +6,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" align="center">Lista de clientes</div>
+                        <a href="{{ url('client/create') }}"
+                           class="btn btn-xs btn-success pull-right">Adicionar novo Cliente</a>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -47,7 +49,7 @@
                                                     <a href="{{ url('client/edit/' . $client['idClient']) }}"
                                                        class="btn btn-xs btn-warning pull-right">Edit</a>
                                                 </div>
-                                                <div >
+                                                <div>
                                                     {{ Form::open(['method' => 'DELETE','route'=>['client.destroy',$client['idClient']]]) }}
 
                                                     {{ Form::submit('Excluir',array('class' => 'btn btn-xs btn-danger pull-right')) }}

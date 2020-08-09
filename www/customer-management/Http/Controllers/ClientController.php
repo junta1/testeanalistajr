@@ -48,14 +48,19 @@ class ClientController extends Controller
         ]));
     }
 
+    public function create()
+    {
+        return view('client.create');
+    }
+
     public function store(ClientValidation $request)
     {
         try {
             $input = $request->all();
 
-            $data = $this->client->save($input);
+            $this->client->save($input);
 
-            return response()->json($data, 200);
+            return redirect()->route('clients.index');
 
         } catch (\Exception $e) {
 
