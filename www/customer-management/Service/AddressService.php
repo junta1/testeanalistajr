@@ -37,12 +37,18 @@ class AddressService
     {
         $data = $this->inputCustom($input);
 
+        $main = $this->all($idClient);
+
+        if (count($main) == 0) {
+            $data['addr_main'] = true;
+        }
+
         $dataCustom = $this->address->save($data, $idClient);
 
         return $this->outputCustom($dataCustom);
     }
 
-    public function update(array $input, int $id):array
+    public function update(array $input, int $id): array
     {
         $data = $this->inputCustom($input);
 
@@ -83,7 +89,7 @@ class AddressService
             'number' => $output['addr_number'],
             'city' => $output['addr_city'],
             'state' => $output['addr_state'],
-            'main' => $output['addr_main'],
+            'main' => ($output['addr_main'] == true ? 'Sim' : 'Não'),
         ];
     }
 }

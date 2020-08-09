@@ -5,6 +5,7 @@ namespace CustomerManagement\Http\Controllers;
 use App\Http\Controllers\Controller;
 use CustomerManagement\Service\AddressService;
 use CustomerManagement\Service\ClientService;
+use CustomerManagement\Validation\AddressValidation;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -53,7 +54,7 @@ class AddressController extends Controller
         return view('address.create', compact('client'));
     }
 
-    public function store(Request $request, int $idClient)
+    public function store(AddressValidation $request, int $idClient)
     {
         try {
             $input = $request->all();
@@ -75,7 +76,7 @@ class AddressController extends Controller
         return view('address.edit', compact('address'));
     }
 
-    public function update(Request $request, int $id)
+    public function update(AddressValidation $request, int $id)
     {
         try {
             $input = $request->all();
