@@ -40,8 +40,8 @@
                                     <tr>
                                         <td>{{$client['companyName']}}</td>
                                         <td>{{$client['cnpj']}}</td>
-                                        <td>{{$client['telephone']}}</td>
                                         <td>{{$client['responsibleName']}}</td>
+                                        <td>{{$client['telephone']}}</td>
                                         <td>{{$client['email']}}</td>
                                         <td>
                                             <div>
