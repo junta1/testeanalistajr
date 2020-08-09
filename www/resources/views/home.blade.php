@@ -73,51 +73,30 @@
     </div>
 
 
-{{--    <div class="container">--}}
-
-{{--        <h1>Laravel 5.8 Datatables Tutorial <br/> HDTuto.com</h1>--}}
-
-{{--        <table class="table table-bordered data-table">--}}
-
-{{--            <thead>--}}
-
-{{--            <tr>--}}
-{{--                <th>Email</th>--}}
-
-{{--                <th width="100px">Action</th>--}}
-{{--            </tr>--}}
-
-{{--            </thead>--}}
-
-{{--            <tbody>--}}
-
-{{--            </tbody>--}}
-
-{{--        </table>--}}
-
-{{--    </div>--}}
-
-
-{{--    <script type="text/javascript">--}}
-
-{{--        $(function () {--}}
-
-{{--            var table = $('.data-table').DataTable({--}}
-
-{{--                processing: true,--}}
-
-{{--                serverSide: true,--}}
-
-{{--                ajax: "{{ route('clients.index') }}",--}}
-{{--                data: [{'email':'rafael'}],--}}
-{{--                columns: [--}}
-
-{{--                    {data: 'email', name: 'email'},--}}
-
-{{--                    {data: 'action', name: 'action', orderable: false, searchable: false},--}}
-{{--                ]--}}
-{{--            });--}}
-{{--        });--}}
-
-{{--    </script>--}}
+    <div class="container">
+        <h2>Laravel DataTables Tutorial Example</h2>
+        <table class="table table-bordered" id="table">
+            <thead>
+            <tr>
+                <th>idClient</th>
+                <th>companyName</th>
+                <th>cnpj</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <script>
+        $(function() {
+            $('#table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ url('clients') }}',
+                columns: [
+                    { data: 'idClient', name: 'idClient' },
+                    { data: 'companyName', name: 'companyName' },
+                    { data: 'cnpj', name: 'cnpj' }
+                ]
+            });
+        });
+    </script>
 @endsection

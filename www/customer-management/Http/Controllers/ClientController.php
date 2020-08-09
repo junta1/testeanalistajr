@@ -31,12 +31,19 @@ class ClientController extends Controller
 
         $clients = $this->client->all($input);
 
-//        $dataTable = DataTables::of($clients)->make(true);
-        $dataTable = json_encode($clients);
+        if ($request->ajax()) {
+            return Datatables::of($clients)
+                ->addIndexColumn()
+//                ->addColumn('action', function($row){
+//                    $btn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+//                    return $btn;
+//                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
         return view('home', compact([
             'clients',
-            'dataTable',
         ]));
     }
 
