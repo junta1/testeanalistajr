@@ -32,12 +32,17 @@ class ClientController extends Controller
         $clients = $this->client->all($input);
 
         if ($request->ajax()) {
+
             return Datatables::of($clients)
                 ->addIndexColumn()
-//                ->addColumn('action', function($row){
-//                    $btn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-//                    return $btn;
-//                })
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="' . url('client/' . $row['idClient']) . '" class="view btn btn-info btn-sm">View</a>';
+
+                    $btn = $btn . '<a href="' . url('client/edit/' . $row['idClient']) . '" class="edit btn btn-primary btn-sm">Edit</a>';
+
+                    $btn = $btn . '<a href="' . url('client/delete', $row['idClient']) . '" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $btn;
+                })
                 ->rawColumns(['action'])
                 ->make(true);
         }
