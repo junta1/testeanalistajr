@@ -36,7 +36,9 @@ class ClientService
     public function save(array $input): array
     {
         $dataCustom = $this->inputCustom($input);
-        $dataCustom['created_by'] = 1;
+
+        $user = auth()->user()->id;
+        $dataCustom['created_by'] = $user;
 
         $data = $this->client->save($dataCustom);
 
@@ -46,7 +48,9 @@ class ClientService
     public function update(array $input, int $id): array
     {
         $dataCustom = $this->inputCustom($input);
-        $dataCustom['updated_by'] = 1;
+
+        $user = auth()->user()->id;
+        $dataCustom['updated_by'] = $user;
 
         $data = $this->client->update($dataCustom, $id);
 
@@ -55,7 +59,7 @@ class ClientService
 
     public function delete($id): bool
     {
-        $user = 1;
+        $user = auth()->user()->id;
         return $this->client->delete($id, $user);
     }
 

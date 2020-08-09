@@ -46,7 +46,7 @@
                                         <td>
                                             <div>
                                                 <a href="{{ url('client/edit/' . $client['idClient']) }}"
-                                                   class="btn btn-xs btn-warning pull-right">Edit</a>
+                                                   class="btn btn-primary btn-sm">Editar</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -55,7 +55,7 @@
 
                                 <div class="card-footer" align="center">Endereço do cliente</div>
                                 <a href="{{ url('address/create/'. $client['idClient']) }}"
-                                   class="btn btn-xs btn-success pull-right">Adicionar novo Cliente</a>
+                                   class="btn btn-xs btn-success pull-right">Adicionar novo Endereço</a>
 
                                 <table class="table">
                                     <thead>
@@ -82,13 +82,13 @@
                                             <td>
                                                 <div>
                                                     <a href="{{ url('address/'.$address['idAddress'] .'/edit') }}"
-                                                       class="btn btn-xs btn-warning pull-right">Edit</a>
+                                                       class="btn btn-primary btn-sm">Editar</a>
                                                 </div>
 
                                                 <div>
                                                     {{ Form::open(['method' => 'DELETE','route'=>['address.destroy',$address['idAddress'], $client['idClient']]]) }}
 
-                                                    {{ Form::submit('Excluir',array('class' => 'btn btn-xs btn-danger pull-right')) }}
+                                                    {{ Form::submit('Excluir',array('class' => 'btn btn-danger btn-sm')) }}
 
                                                     {{ Form::close() }}
                                                 </div>
