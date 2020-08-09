@@ -71,4 +71,53 @@
             </div>
         </div>
     </div>
+
+
+{{--    <div class="container">--}}
+
+{{--        <h1>Laravel 5.8 Datatables Tutorial <br/> HDTuto.com</h1>--}}
+
+{{--        <table class="table table-bordered data-table">--}}
+
+{{--            <thead>--}}
+
+{{--            <tr>--}}
+{{--                <th>Email</th>--}}
+
+{{--                <th width="100px">Action</th>--}}
+{{--            </tr>--}}
+
+{{--            </thead>--}}
+
+{{--            <tbody>--}}
+
+{{--            </tbody>--}}
+
+{{--        </table>--}}
+
+{{--    </div>--}}
+
+
+{{--    <script type="text/javascript">--}}
+
+{{--        $(function () {--}}
+
+{{--            var table = $('.data-table').DataTable({--}}
+
+{{--                processing: true,--}}
+
+{{--                serverSide: true,--}}
+
+{{--                ajax: "{{ route('clients.index') }}",--}}
+{{--                data: [{'email':'rafael'}],--}}
+{{--                columns: [--}}
+
+{{--                    {data: 'email', name: 'email'},--}}
+
+{{--                    {data: 'action', name: 'action', orderable: false, searchable: false},--}}
+{{--                ]--}}
+{{--            });--}}
+{{--        });--}}
+
+{{--    </script>--}}
 @endsection
