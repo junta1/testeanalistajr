@@ -1,23 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header" align="center">Lista de clientes</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                <div class="table-responsive"/>
+                                <table class="table">
+                                    <thead>
+                                    <th>Id</th>
+                                    <th>Nome da Empresa</th>
+                                    <th>CNPJ</th>
+                                    <th>Nome do responsável</th>
+                                    <th>Telefone</th>
+                                    <th>E-mail</th>
+                                    <th>Ação</th>
+                                    </thead>
+
+                                    @foreach ($clients as $client)
+                                        <tbody>
+                                        <tr>
+                                            <td>{{$client['idClient']}}</td>
+                                            <td>{{$client['companyName']}}</td>
+                                            <td>{{$client['cnpj']}}</td>
+                                            <td>{{$client['telephone']}}</td>
+                                            <td>{{$client['responsibleName']}}</td>
+                                            <td>{{$client['email']}}</td>
+                                            <td>
+                                                <a href="{{ url('client/edit/' . $client['idClient']) }}" class="btn btn-xs btn-info pull-right">Edit</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    @endforeach
+
+                                </table>
+                            </div>
                         </div>
-                    @endif
-
-                    You are logged in!
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
