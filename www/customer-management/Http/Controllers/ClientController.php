@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace CustomerManagement\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use CustomerManagement\Service\AddressService;
 use CustomerManagement\Service\ClientService;
 use CustomerManagement\Validation\ClientValidation;
 use Illuminate\Http\Request;
@@ -13,9 +14,13 @@ class ClientController extends Controller
 {
     protected $client;
 
-    public function __construct(ClientService $clientService)
+    protected $address;
+
+    public function __construct(ClientService $clientService, AddressService $addressService)
     {
         $this->client = $clientService;
+
+        $this->address = $addressService;
 
         $this->middleware('auth');
     }
@@ -35,7 +40,12 @@ class ClientController extends Controller
     {
         $client = $this->client->find($id);
 
-        return view('client.show', compact('client'));
+        $addresses = $this->address->all($client['idClient']);
+
+        return view('client.show', compact([
+            'client',
+            'addresses'
+        ]));
     }
 
     public function store(ClientValidation $request)

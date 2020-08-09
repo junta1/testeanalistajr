@@ -19,7 +19,7 @@ class AddressService
         $datas = $this->address->all($idClient);
 
         foreach ($datas as $data) {
-            $outputCustom = $this->outputCustom($data);
+            $outputCustom[] = $this->outputCustom($data);
         }
 
         return $outputCustom;
