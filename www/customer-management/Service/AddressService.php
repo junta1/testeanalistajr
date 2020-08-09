@@ -74,6 +74,7 @@ class AddressService
     protected function outputCustom($output): array
     {
         return [
+            'idAddress' => $output['addr_id'],
             'zipcode' => $output['addr_zipcode'],
             'publicPlace' => $output['addr_public_place'],
             'neighbordhood' => $output['addr_neighbordhood'],

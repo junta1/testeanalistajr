@@ -86,9 +86,9 @@ class AddressController extends Controller
     public function destroy(int $id, int $idClient)
     {
         try {
-            $data = $this->address->delete($id, $idClient);
+            $this->address->delete($id, $idClient);
 
-            return response()->json($data, 200);
+            return redirect()->route('clients.index');
 
         } catch (\Exception $e) {
 
