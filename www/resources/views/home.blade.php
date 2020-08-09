@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" align="center">Lista de clientes</div>
 
@@ -38,7 +38,22 @@
                                             <td>{{$client['responsibleName']}}</td>
                                             <td>{{$client['email']}}</td>
                                             <td>
-                                                <a href="{{ url('client/edit/' . $client['idClient']) }}" class="btn btn-xs btn-info pull-right">Edit</a>
+                                                <div>
+                                                    <a href="{{ url('client/' . $client['idClient']) }}"
+                                                       class="btn btn-xs btn-primary pull-right">Visualizar</a>
+                                                </div>
+
+                                                <div>
+                                                    <a href="{{ url('client/edit/' . $client['idClient']) }}"
+                                                       class="btn btn-xs btn-warning pull-right">Edit</a>
+                                                </div>
+                                                <div >
+                                                    {{ Form::open(['method' => 'DELETE','route'=>['client.destroy',$client['idClient']]]) }}
+
+                                                    {{ Form::submit('Excluir',array('class' => 'btn btn-xs btn-danger pull-right')) }}
+
+                                                    {{ Form::close() }}
+                                                </div>
                                             </td>
                                         </tr>
                                         </tbody>

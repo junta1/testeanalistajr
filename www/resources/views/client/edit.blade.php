@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    {{--Identificando os erros na tela--}}
+
     @if (count($errors)> 0)
         <div class="alert alert-danger">
             <ul>

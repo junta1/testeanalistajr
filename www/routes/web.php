@@ -23,7 +23,7 @@ Route::get('clients/{data?}','\CustomerManagement\Http\Controllers\ClientControl
 Route::get('client/{id}','\CustomerManagement\Http\Controllers\ClientController@show');
 Route::post('client', '\CustomerManagement\Http\Controllers\ClientController@store');
 Route::put('client/{id}', '\CustomerManagement\Http\Controllers\ClientController@update')->name('client.update');
-Route::delete('client/{id}', '\CustomerManagement\Http\Controllers\ClientController@destroy');
+Route::delete('client/{id}', '\CustomerManagement\Http\Controllers\ClientController@destroy')->name('client.destroy');
 Route::get('client/edit/{id}', '\CustomerManagement\Http\Controllers\ClientController@edit');
 
 Route::get('adresses/{idClient}','\CustomerManagement\Http\Controllers\AddressController@index');

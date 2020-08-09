@@ -17,7 +17,7 @@ class ClientController extends Controller
     {
         $this->client = $clientService;
 
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index(Request $request)
@@ -33,15 +33,9 @@ class ClientController extends Controller
 
     public function show(int $id)
     {
-        try {
-            $data = $this->client->find($id);
+        $client = $this->client->find($id);
 
-            return response()->json($data, 200);
-
-        } catch (\Exception $e) {
-
-            return response()->json($e->getMessage(), 400);
-        }
+        return view('client.show', compact('client'));
     }
 
     public function store(ClientValidation $request)
@@ -68,19 +62,25 @@ class ClientController extends Controller
 
     public function update(ClientValidation $request, int $id)
     {
-        $input = $request->all();
+        try {
+            $input = $request->all();
 
-        $this->client->update($input, $id);
+            $this->client->update($input, $id);
 
-        return redirect()->route('clients.index');
+            return redirect()->route('clients.index');
+
+        } catch (\Exception $e) {
+
+            return response()->json($e->getMessage(), 400);
+        }
     }
 
     public function destroy(int $id)
     {
         try {
-            $data = $this->client->delete($id);
+            $this->client->delete($id);
 
-            return response()->json($data, 200);
+            return redirect()->route('clients.index');
 
         } catch (\Exception $e) {
 
