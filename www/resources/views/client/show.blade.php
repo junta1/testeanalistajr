@@ -80,6 +80,10 @@
                                             <td>{{$address['city']}}</td>
                                             <td>{{$address['state']}}</td>
                                             <td>
+                                                <div>
+                                                    <a href="{{ url('address/'.$address['idAddress'] .'/edit') }}"
+                                                       class="btn btn-xs btn-warning pull-right">Edit</a>
+                                                </div>
 
                                                 <div>
                                                     {{ Form::open(['method' => 'DELETE','route'=>['address.destroy',$address['idAddress'], $client['idClient']]]) }}

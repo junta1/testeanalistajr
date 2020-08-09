@@ -68,14 +68,21 @@ class AddressController extends Controller
         }
     }
 
+    public function edit(int $id)
+    {
+        $address = $this->address->find($id);
+
+        return view('address.edit', compact('address'));
+    }
+
     public function update(Request $request, int $id)
     {
         try {
             $input = $request->all();
 
-            $data = $this->address->update($input, $id);
+            $this->address->update($input, $id);
 
-            return response()->json($data, 200);
+            return redirect()->route('clients.index');
 
         } catch (\Exception $e) {
 
