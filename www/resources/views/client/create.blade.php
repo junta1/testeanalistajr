@@ -51,7 +51,7 @@
 
                 <div class="row">
                     <div class='col-md-33' text-center>
-                        <a href="{{ url('clients') }}" class="btn btn-dark">Voltar</a>
+                        <a href="{{ URL::previous() }}" class="btn btn-dark">Voltar</a>
                     </div>
                     <div class="col-md-3">
                         {{ Form::submit('Cadastrar',array('class' => 'btn btn-success')) }}
