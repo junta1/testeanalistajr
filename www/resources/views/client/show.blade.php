@@ -66,6 +66,7 @@
                                     <th>Número</th>
                                     <th>Cidade</th>
                                     <th>Estado</th>
+                                    <th>Principal</th>
                                     <th>Ação</th>
                                     </thead>
 
@@ -79,6 +80,7 @@
                                             <td>{{$address['number']}}</td>
                                             <td>{{$address['city']}}</td>
                                             <td>{{$address['state']}}</td>
+                                            <td>{{$address['main']}}</td>
                                             <td>
                                                 <div>
                                                     <a href="{{ url('address/'.$address['idAddress'] .'/edit') }}"
