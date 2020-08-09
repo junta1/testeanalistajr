@@ -53,7 +53,7 @@
                                     </tbody>
                                 </table>
 
-                                <div class="card-footer" align="center">Endereço do cliente </div>
+                                <div class="card-footer" align="center">Endereço do cliente</div>
                                 <a href="{{ url('address/create/'. $client['idClient']) }}"
                                    class="btn btn-xs btn-success pull-right">Adicionar novo Cliente</a>
 
@@ -79,7 +79,16 @@
                                             <td>{{$address['number']}}</td>
                                             <td>{{$address['city']}}</td>
                                             <td>{{$address['state']}}</td>
-                                            <td></td>
+                                            <td>
+
+                                                <div>
+                                                    {{ Form::open(['method' => 'DELETE','route'=>['address.destroy',$address['idAddress'], $client['idClient']]]) }}
+
+                                                    {{ Form::submit('Excluir',array('class' => 'btn btn-xs btn-danger pull-right')) }}
+
+                                                    {{ Form::close() }}
+                                                </div>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     @endforeach
@@ -88,11 +97,11 @@
                             </div>
                         </div>
 
-                            <div class="row">
-                                <div class='col-md-33' text-center>
-                                    <a href="{{ url('clients') }}" class="btn btn-dark">Voltar</a>
-                                </div>
+                        <div class="row">
+                            <div class='col-md-33' text-center>
+                                <a href="{{ url('clients') }}" class="btn btn-dark">Voltar</a>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
