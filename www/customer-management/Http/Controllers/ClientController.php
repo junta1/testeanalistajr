@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use CustomerManagement\Service\ClientService;
 use CustomerManagement\Validation\ClientValidation;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ClientController extends Controller
 {
@@ -15,21 +16,19 @@ class ClientController extends Controller
     public function __construct(ClientService $clientService)
     {
         $this->client = $clientService;
+
+//        $this->middleware('auth');
     }
 
     public function index(Request $request)
     {
-        try {
-            $input = $request->all();
+        $input = $request->all();
 
-            $data = $this->client->all($input);
+        $clients = $this->client->all($input);
 
-            return response()->json($data, 200);
+//        $dataTable = DataTables::of($data)->make(true);
 
-        } catch (\Exception $e) {
-
-            return response()->json($e->getMessage(), 400);
-        }
+        return view('home', compact('clients'));
     }
 
     public function show(int $id)
@@ -60,19 +59,20 @@ class ClientController extends Controller
         }
     }
 
+    public function edit(int $id)
+    {
+        $client = $this->client->find($id);
+
+        return view('client.edit', compact('client'));
+    }
+
     public function update(ClientValidation $request, int $id)
     {
-        try {
-            $input = $request->all();
+        $input = $request->all();
 
-            $data = $this->client->update($input, $id);
+        $this->client->update($input, $id);
 
-            return response()->json($data, 200);
-
-        } catch (\Exception $e) {
-
-            return response()->json($e->getMessage(), 400);
-        }
+        return redirect()->route('clients.index');
     }
 
     public function destroy(int $id)
