@@ -43,3 +43,9 @@ Defina a chave da aplicação:
 `php artisan key:generate`
 
 Link para acessar a página inicial do projeto: <http://localhost:8888>
+
+***Acesse com o usuário e senha:***
+
+Usuário: admin@gmail.com
+
+Senha: 12345678
