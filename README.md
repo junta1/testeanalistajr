@@ -1,23 +1,45 @@
-### O desafio é o seguinte:
-
+# Gereciamento de clientes - Desafio
 Uma empresa de distribuição de alimentos precisa de um sistema interno para gerenciar seus clientes e endereços de entrega.
 
-O cadastro será interno e deve ser restrito a usuários logados com login e senha. O cadastro do cliente deve conter Nome Empresa, CNPJ, Telefone, Nome do Responsável, Email e Endereço(Cep, Logradouro, Bairro, Complemento, Número, Cidade, Estado).
+## Baixando projeto
 
-Quanto ao Endereço podem ser cadastrados mais de um endereço para cada cliente devendo ser selecionado UM endereço como principal, a definição do endereço principal pode ser alterada a qualquer momento.
+`git clone https://github.com/junta1/testeanalistajr.git`
 
-O sistema deve permitir Listagem, Criação, Edição, Exclusão e Visualização do Cliente e de seus endereços.
+## Levantar o Container
 
-Requisitos
-	
-	Utilizar API ViaCEP (https://viacep.com.br/ ) para preenchimento automático dos campos de endereço ao digital o cep.
-	Utilizar DataTable (https://datatables.net/ ) na listagem para ordenação e busca rápida.
-	O desafio deve ser feito utilizando como base este projeto. Leia com atenção as instruções acima.
+Acesse ao projeto e lavante o container: 
 
-As modelagens não foram propostas nem enviadas junto ao desafio porque queremos ver a sua solução. Não há certo nem errado, mas queremos enxergar a sua forma de desenvolver. Nos envie a modelagem junto com o desafio(pode colocá-la no repositório do projeto).
+`docker-compose up -d`
 
-Você deve enviar o link do repositório da sua solução do desafio para o email vagas@grtsdigital.com.br com o assunto Desafio Analista de Desenvolvimento Jr. - {{$seu_nome}} até o dia 09/08/2020 às 23:59h. 
+Acesse ao container: 
 
-Caso tenha alguma instrução para executarmos o projeto você pode enviar no corpo do email.
+`docker exec -it analistaJr-php bash`
 
-#### Let’s go? Show me the code!
+_Obs: Configure o projeto nos próximos passos._ 
+
+## Configurando projeto
+
+Depedências via composer:
+
+`composer install`
+
+Depedências via nodejs:
+
+`npm install && npm run dev`
+
+Gere as migrations com as seeds:
+
+`php artisan migrate:refresh --seed`
+
+Altere as permissões:
+
+`chmod -R 777 storage/ bootstrap/`
+
+Copiar e colar o arquivo .env.example 
+situado em (testeanalistajr/www/.env.example) para .env no mesmo local.
+
+Defina a chave da aplicação:
+
+`php artisan key:generate`
+
+Link para acessar a página inicial do projeto: <http://localhost:8888>
