@@ -27,20 +27,23 @@ Depedências via nodejs:
 
 `npm install && npm run dev`
 
-Gere as migrations com as seeds:
-
-`php artisan migrate:refresh --seed`
 
 Altere as permissões:
 
 `chmod -R 777 storage/ bootstrap/`
 
 Copiar e colar o arquivo .env.example 
-situado em (testeanalistajr/www/.env.example) para .env no mesmo local.
+situado em (testeanalistajr/www/.env.example) para .env no mesmo local ou executar o comando:
+
+`cp .env.example  .env`
 
 Defina a chave da aplicação:
 
 `php artisan key:generate`
+
+Gere as migrations com as seeds:
+
+`php artisan migrate:refresh --seed`
 
 Link para acessar a página inicial do projeto: <http://localhost:8888>
 
